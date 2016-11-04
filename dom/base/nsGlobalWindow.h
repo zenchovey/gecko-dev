@@ -402,6 +402,7 @@ public:
 
   // nsPIDOMWindow
   virtual nsPIDOMWindow* GetPrivateRoot() override;
+  already_AddRefed<nsIDOMWindow> GetPrivateRoot2();
 
   // Outer windows only.
   virtual void ActivateOrDeactivate(bool aActivate) override;
@@ -862,6 +863,7 @@ public:
   uint32_t Length();
   already_AddRefed<nsIDOMWindow> GetTopOuter();
   already_AddRefed<nsIDOMWindow> GetTop(mozilla::ErrorResult& aError);
+  already_AddRefed<nsIDOMWindow> GetPrivateRoot(mozilla::ErrorResult& aError);
 
   nsresult GetPrompter(nsIPrompt** aPrompt) override;
 protected:

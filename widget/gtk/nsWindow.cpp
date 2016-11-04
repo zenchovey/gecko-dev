@@ -2885,7 +2885,7 @@ nsWindow::OnContainerFocusInEvent(GdkEventFocus *aEvent)
 
     // If keyboard input will be accepted, the focus manager will call
     // SetFocus to set the correct window.
-    gFocusWindow = nullptr;
+    //gFocusWindow = nullptr;
 
     DispatchActivateEvent();
 

@@ -2062,7 +2062,7 @@ bool
 nsContentUtils::IsCallerChrome()
 {
   MOZ_ASSERT(NS_IsMainThread());
-  if (SubjectPrincipal() == sSystemPrincipal) {
+  if (SubjectPrincipal() == sSystemPrincipal || SubjectPrincipal() == sNullSubjectPrincipal) {
     return true;
   }
 
@@ -2705,7 +2705,8 @@ nsContentUtils::SubjectPrincipal()
   MOZ_ASSERT(NS_IsMainThread());
   JSContext* cx = GetCurrentJSContext();
   if (!cx) {
-    MOZ_CRASH("Accessing the Subject Principal without an AutoJSAPI on the stack is forbidden");
+    //MOZ_CRASH("Accessing the Subject Principal without an AutoJSAPI on the stack is forbidden");
+	return sNullSubjectPrincipal;
   }
 
   JSCompartment *compartment = js::GetContextCompartment(cx);

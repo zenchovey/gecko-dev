@@ -42,6 +42,9 @@
 #define MOZ_SUPPORTS_RT_SIGNALS 1
 #endif
 
+// Conflicts with mono
+#undef MOZ_SUPPORTS_RT_SIGNALS
+
 #if defined(MOZ_SUPPORTS_RT_SIGNALS)
 #include <fcntl.h>
 #include <sys/types.h>

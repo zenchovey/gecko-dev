@@ -4408,11 +4408,13 @@ nsGlobalWindow::GetOpenerWindowOuter()
 
   // First, check if we were called from a privileged chrome script
   if (nsContentUtils::LegacyIsCallerChromeOrNativeCode()) {
+#if 0
     // Catch the case where we're chrome but the opener is not...
     if (GetPrincipal() == nsContentUtils::GetSystemPrincipal() &&
         win->GetPrincipal() != nsContentUtils::GetSystemPrincipal()) {
       return nullptr;
     }
+#endif
     return opener;
   }
 
@@ -5607,6 +5609,20 @@ nsGlobalWindow::GetTop(mozilla::ErrorResult& aError)
 {
   FORWARD_TO_OUTER_OR_THROW(GetTopOuter, (), aError, nullptr);
 }
+
+already_AddRefed<nsIDOMWindow>
+nsGlobalWindow::GetPrivateRoot2()
+{
+	nsCOMPtr<nsIDOMWindow> root = GetPrivateRoot();
+	return root.forget();
+}
+
+already_AddRefed<nsIDOMWindow>
+nsGlobalWindow::GetPrivateRoot(mozilla::ErrorResult& aError)
+{
+  FORWARD_TO_OUTER_OR_THROW(GetPrivateRoot2, (), aError, nullptr);
+}
+
 
 nsPIDOMWindow*
 nsGlobalWindow::GetChildWindow(const nsAString& aName)

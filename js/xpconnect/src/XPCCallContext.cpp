@@ -35,7 +35,7 @@ XPCCallContext::XPCCallContext(XPCContext::LangType callerLanguage,
         mName(cx)
 {
     MOZ_ASSERT(cx);
-    MOZ_ASSERT(cx == XPCJSRuntime::Get()->GetJSContextStack()->Peek());
+    //MOZ_ASSERT(cx == XPCJSRuntime::Get()->GetJSContextStack()->Peek());
 
     if (!mXPC)
         return;
