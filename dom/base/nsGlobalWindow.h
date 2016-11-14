@@ -517,6 +517,7 @@ public:
   {
     return FromSupports(wrapper->Native());
   }
+
   already_AddRefed<nsPIDOMWindow> GetTop() override;
   nsPIDOMWindow* GetScriptableTop() override;
   inline nsGlobalWindow *GetTopInternal()
@@ -977,6 +978,9 @@ public:
   already_AddRefed<nsICSSDeclaration>
     GetComputedStyle(mozilla::dom::Element& aElt, const nsAString& aPseudoElt,
                      mozilla::ErrorResult& aError) override;
+  already_AddRefed<nsICSSDeclaration>
+    GetComputedStyleLegacy(mozilla::dom::Element& aElt, const nsAString& aPseudoElt,
+                     mozilla::ErrorResult& aError);	
   already_AddRefed<mozilla::dom::MediaQueryList> MatchMediaOuter(const nsAString& aQuery);
   already_AddRefed<mozilla::dom::MediaQueryList> MatchMedia(const nsAString& aQuery,
                                                             mozilla::ErrorResult& aError);

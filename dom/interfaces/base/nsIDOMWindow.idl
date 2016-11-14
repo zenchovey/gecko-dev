@@ -20,7 +20,16 @@ interface nsIVariant;
  */
 
 [scriptable, uuid(b8343993-0383-4add-9930-ad176b189240)]
-interface nsIDOMWindow : nsISupports {};
+interface nsIDOMWindow : nsISupports 
+{
+	// CSSOM
+	/**
+	* @see <http://dev.w3.org/csswg/cssom/#dom-window-getcomputedstyle>
+	*/
+	nsIDOMCSSStyleDeclaration GetComputedStyleLegacy(in nsIDOMElement elt, [optional] in DOMString pseudoElt);
+	nsIDOMWindow GetRealTopLegacy();
+	nsIDOMWindow GetRealParentLegacy();
+};
 
 /**
  * Empty interface for compatibility with older versions.
