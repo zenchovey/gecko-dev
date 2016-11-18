@@ -26,7 +26,6 @@ interface nsIDOMWindow : nsISupports
 	/**
 	* @see <http://dev.w3.org/csswg/cssom/#dom-window-getcomputedstyle>
 	*/
-	nsIDOMCSSStyleDeclaration GetComputedStyleLegacy(in nsIDOMElement elt, [optional] in DOMString pseudoElt);
 	nsIDOMWindow GetRealTopLegacy();
 	nsIDOMWindow GetRealParentLegacy();
 };

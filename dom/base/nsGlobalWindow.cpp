@@ -3837,8 +3837,8 @@ NS_IMETHODIMP
 nsGlobalWindow::GetRealParentLegacy(nsIDOMWindow** pParent)
 {
   nsCOMPtr<nsPIDOMWindow> parent = GetParent();
-  if (parent != NULL)
-    *pParent = dynamic_cast<nsIDOMWindow*>(parent.get());
+  if (parent)
+    parent.forget(pParent);
   return NS_OK;
 }
 
@@ -3884,32 +3884,10 @@ GetTopImpl(nsGlobalWindow* aWin, nsPIDOMWindow** aTop, bool aScriptable)
 NS_IMETHODIMP
 nsGlobalWindow::GetRealTopLegacy(nsIDOMWindow** aTop)
 {
-  nsresult result;
-  nsGlobalWindow* outer;
-  nsCOMPtr<nsPIDOMWindow> pTop;
-  
-  if (IsInnerWindow()) 
-  {
-	outer = GetOuterWindowInternal();
-	if (!outer) 
-	{
-	  return NS_ERROR_NOT_INITIALIZED;
-	}
-  } 
-  else 
-  {
-	outer = this;
-  }
-  
-  result = GetTopImpl(outer, getter_AddRefs(pTop), false);
-  if (result == NS_OK)
-  {
-    nsIDOMWindow* domWindow = dynamic_cast<nsIDOMWindow*>(pTop.get());
-	if (domWindow != NULL)
-	  *aTop = domWindow; 
-  }
-  
-  return result;
+  nsCOMPtr<nsPIDOMWindow> top = GetTop();
+  if (top)
+    top.forget(aTop);
+  return NS_OK;
 }
 
 /**
@@ -9978,13 +9956,6 @@ nsGlobalWindow::GetComputedStyle(Element& aElt, const nsAString& aPseudoElt,
 {
   MOZ_ASSERT(IsInnerWindow());
   return GetComputedStyleHelper(aElt, aPseudoElt, false, aError);
-}
-
-NS_IMETHODIMP
-nsGlobalWindow::GetComputedStyleLegacy(nsIDOMElement* aElt, const nsAString& aPseudoElt, nsIDOMCSSStyleDeclaration** aReturn)
-{
-  FORWARD_TO_INNER(GetComputedStyleLegacy, (aElt, aPseudoElt, aReturn), NS_ERROR_UNEXPECTED);
-  return GetComputedStyleHelper(aElt, aPseudoElt, false, aReturn);
 }
 
 already_AddRefed<nsICSSDeclaration>
