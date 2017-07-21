@@ -255,26 +255,17 @@ bool nsWinGesture::GetGestureConfig(HWND hWnd, DWORD dwFlags, PUINT pcIDs, PGEST
 
 bool nsWinGesture::BeginPanningFeedback(HWND hWnd)
 {
-  if (!beginPanningFeedback)
-    return false;
-
-  return beginPanningFeedback(hWnd);
+  return false;
 }
 
 bool nsWinGesture::EndPanningFeedback(HWND hWnd)
 {
-  if (!beginPanningFeedback)
-    return false;
-
-  return endPanningFeedback(hWnd, TRUE);
+  return false;
 }
 
 bool nsWinGesture::UpdatePanningFeedback(HWND hWnd, LONG offsetX, LONG offsetY, BOOL fInInertia)
 {
-  if (!beginPanningFeedback)
-    return false;
-
-  return updatePanningFeedback(hWnd, offsetX, offsetY, fInInertia);
+  return false;
 }
 
 bool nsWinGesture::IsPanEvent(LPARAM lParam)
